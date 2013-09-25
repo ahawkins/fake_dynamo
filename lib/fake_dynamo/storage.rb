@@ -42,7 +42,6 @@ module FakeDynamo
     end
 
     def reset
-      puts "resetting database ..."
       @aof.close if @aof
       @aof = nil
       delete_db
@@ -57,7 +56,6 @@ module FakeDynamo
     end
 
     def shutdown
-      puts "shutting down fake_dynamo ..."
       @aof.close if @aof
     end
 
@@ -73,7 +71,6 @@ module FakeDynamo
     def load_aof
       return if @loaded
       file = File.new(db_path, 'r')
-      puts "Loading fake_dynamo data ..."
       loop do
         operation = file.readline.chomp
         size = Integer(file.readline.chomp)
@@ -100,7 +97,6 @@ module FakeDynamo
     def compact!
       return if @compacted
       @aof = Tempfile.new('compact')
-      puts "Compacting db ..."
       db.tables.each do |_, table|
         persist('CreateTable', table.create_table_data)
         table.items.each do |_, item|
