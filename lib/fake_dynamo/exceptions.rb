@@ -1,57 +1,48 @@
 module FakeDynamo
-  class Error < ::StandardError
+  Error = Class.new StandardError
 
-    class_attribute :description, :type, :status
+  class ErrorFactory
+    class << self
+      def build(description, type = 'com.amazon.dynamodb.v201112045')
+        Class.new Error do
+          define_method :type do
+            type
+          end
 
-    self.type = 'com.amazon.dynamodb.v20111205'
-    self.status = 400
+          define_method :description do
+            description
+          end
 
-    attr_reader :detail
+          attr_reader :detail
 
-    def initialize(detail='')
-      @detail = detail
-      super(detail)
+          def initialize(detail='')
+            @detail = detail
+            super(detail)
+          end
+
+          def response
+            {
+              '__type' => "#{type}##{class_name}",
+              'message' => "#{description}: #{detail}"
+            }
+          end
+
+          def class_name
+            self.class.name.split('::').last
+          end
+
+          def status
+            400
+          end
+        end
+      end
     end
-
-    def response
-      {
-        '__type' => "#{self.class.type}##{class_name}",
-        'message' => "#{self.class.description}: #{@detail}"
-      }
-    end
-
-    def class_name
-      self.class.name.split('::').last
-    end
-
-    def status
-      self.class.status
-    end
   end
 
-  class UnknownOperationException < Error
-    self.type = 'com.amazon.coral.service'
-    self.description = ''
-  end
-
-  class InvalidParameterValueException < Error
-    self.description = 'invalid parameter'
-  end
-
-  class ResourceNotFoundException < Error
-    self.description = 'Requested resource not found'
-  end
-
-  class ResourceInUseException < Error
-    self.description = 'Attempt to change a resource which is still in use'
-  end
-
-  class ValidationException < Error
-    self.description = 'Validation error detected'
-    self.type = 'com.amazon.coral.validate'
-  end
-
-  class ConditionalCheckFailedException < Error
-    self.description = 'The conditional request failed'
-  end
+  UnknownOperationException = ErrorFactory.build '', 'com.amazon.coral.service'
+  InvalidParamterValueException = ErrorFactory.build 'invalid parameter'
+  ResourceNotFoundException = ErrorFactory.build 'Requested resource not found'
+  ResourceInUseException = ErrorFactory.build 'Attempt to change a resource which is still in use'
+  ValidationException = ErrorFactory.build 'Validation error detected', 'com.amazon.coral.validate'
+  ConditionalCheckFailedException = ErrorFactory.build 'Then conditional request failed'
 end

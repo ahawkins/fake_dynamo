@@ -13,6 +13,17 @@ module FakeDynamo
 
     def initialize
       @tables = {}
+      @operation_map = {
+        'CreateTable' => 'create_table',
+        'PutItem' => 'put_item',
+        'GetItem' => 'get_item',
+        'ListTables' => 'list_tables',
+        'BatchWriteItem' => 'batch_write_item',
+        'BatchGetItem' => 'batch_get_item',
+        'DeleteItem' => 'delete_item',
+        'UpdateItem' => 'update_item',
+        'Query' => 'query',
+      }
     end
 
     def reset
@@ -21,7 +32,10 @@ module FakeDynamo
 
     def process(operation, data)
       validate_payload(operation, data)
-      operation = operation.underscore
+      operation = operation_map.fetch operation do
+        fail "Do not know how to handle #{operation}"
+      end
+
       self.send operation, data
     end
 
@@ -171,5 +185,8 @@ module FakeDynamo
       end
     end
 
+    def operation_map
+      @operation_map
+    end
   end
 end
