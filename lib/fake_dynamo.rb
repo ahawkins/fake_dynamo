@@ -14,7 +14,6 @@ require 'fake_dynamo/table'
 require 'fake_dynamo/db'
 require 'fake_dynamo/storage'
 require 'fake_dynamo/server'
-require 'pp'
 
 module FakeDynamo
   class << self
