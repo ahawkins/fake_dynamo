@@ -16,3 +16,11 @@ require 'fake_dynamo/storage'
 require 'fake_dynamo/server'
 require 'pp'
 
+module FakeDynamo
+  class << self
+    def reset
+      Storage.instance.reset
+      DB.instance.reset
+    end
+  end
+end
