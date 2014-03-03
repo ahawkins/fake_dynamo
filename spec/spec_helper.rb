@@ -1,12 +1,10 @@
-$: << File.join(File.dirname(File.dirname(__FILE__)), "lib")
+require 'bundler/setup'
 
-require 'simplecov'
-SimpleCov.start if ENV['COVERAGE']
+require 'fake_dynamo'
 
 require 'rspec'
 require 'rack/test'
 require 'fake_dynamo'
-require 'pry'
 
 module Utils
   def self.deep_copy(x)
