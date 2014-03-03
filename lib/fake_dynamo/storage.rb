@@ -45,10 +45,6 @@ module FakeDynamo
       DB.instance
     end
 
-    def shutdown
-      @aof.close if @aof
-    end
-
     def persist(operation, data)
       return unless write_command?(operation)
       db_aof.puts(operation)
@@ -110,6 +106,10 @@ module FakeDynamo
 
     def db_aof
       @aof ||= File.new(db_path, 'a')
+    end
+
+    def buffer
+      @buffer
     end
   end
 end
