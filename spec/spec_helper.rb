@@ -6,6 +6,8 @@ require 'rspec'
 require 'rack/test'
 require 'fake_dynamo'
 
+ENV['RACK_ENV'] = 'test'
+
 module Utils
   def self.deep_copy(x)
     Marshal.load(Marshal.dump(x))
@@ -15,10 +17,9 @@ end
 module FakeDynamo
   class Storage
     def initialize
+      @file = Tempfile.new "fake-dynamo-#{object_id}.db"
       delete_db
       init_db
     end
   end
 end
-
-FakeDynamo::Storage.db_path = '/tmp/test_db.fdb'

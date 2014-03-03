@@ -1,5 +1,6 @@
 require 'fileutils'
 require 'tempfile'
+require 'stringio'
 
 module FakeDynamo
   class Storage
@@ -7,8 +8,6 @@ module FakeDynamo
     attr_accessor :compacted, :loaded
 
     class << self
-      attr_accessor :db_path
-
       def instance
         @storage ||= Storage.new
       end
@@ -26,19 +25,22 @@ module FakeDynamo
       write_commands.include?(command)
     end
 
+    def db_file
+      @db_file
+    end
+
     def db_path
-      self.class.db_path
+      db_file.path
     end
 
     def init_db
-      return if File.exists? db_path
-      FileUtils.mkdir_p(File.dirname(db_path))
-      FileUtils.touch(db_path)
+      @db_file = Tempfile.new "fake-dynamo-storage.db"
     end
 
     def delete_db
-      return unless File.exists? db_path
-      FileUtils.rm(db_path)
+      return unless db_file
+      db_file.close
+      db_file.unlink
     end
 
     def reset
