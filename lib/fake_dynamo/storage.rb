@@ -1,6 +1,4 @@
-require 'fileutils'
 require 'tempfile'
-require 'stringio'
 
 module FakeDynamo
   class Storage
