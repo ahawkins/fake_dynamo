@@ -17,7 +17,6 @@ end
 module FakeDynamo
   class Storage
     def initialize
-      @file = Tempfile.new "fake-dynamo-#{object_id}.db"
       delete_db
       init_db
     end
