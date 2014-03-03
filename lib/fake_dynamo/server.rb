@@ -3,6 +3,12 @@ require 'rack/lock'
 
 module FakeDynamo
   class Server
+    class << self
+      def call(env)
+        new.call env
+      end
+    end
+
     def initialize
       builder= Rack::Builder.new
       builder.use Rack::Lock

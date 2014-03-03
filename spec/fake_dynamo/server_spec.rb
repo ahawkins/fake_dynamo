@@ -13,7 +13,7 @@ module FakeDynamo
         "ProvisionedThroughput" => {"ReadCapacityUnits" => 5,"WriteCapacityUnits" => 10}
       }
     end
-    let(:app) { Server.new }
+    let(:app) { Server }
 
     it "errors on unknown operations" do
       post '/', data.to_json, 'HTTP_X_AMZ_TARGET' => 'FakeDB_20111205.CreateTable'
