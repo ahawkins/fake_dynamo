@@ -25,14 +25,6 @@ module FakeDynamo
       write_commands.include?(command)
     end
 
-    def db_file
-      @db_file
-    end
-
-    def db_path
-      db_file.path
-    end
-
     def init_db
       @db_file = Tempfile.new "fake-dynamo-storage.db"
     end
@@ -51,10 +43,6 @@ module FakeDynamo
 
     def db
       DB.instance
-    end
-
-    def db_aof
-      @aof ||= File.new(db_path, 'a')
     end
 
     def shutdown
@@ -109,6 +97,19 @@ module FakeDynamo
       FileUtils.mv(@aof.path, db_path)
       @aof = nil
       @compacted = true
+    end
+
+    private
+    def db_file
+      @db_file
+    end
+
+    def db_path
+      db_file.path
+    end
+
+    def db_aof
+      @aof ||= File.new(db_path, 'a')
     end
   end
 end
