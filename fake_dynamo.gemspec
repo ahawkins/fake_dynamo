@@ -1,8 +1,10 @@
 # -*- encoding: utf-8 -*-
-require File.expand_path('../lib/fake_dynamo/version', __FILE__)
+lib = File.expand_path('../lib', __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+require 'fake_dynamo/version'
 
 Gem::Specification.new do |gem|
-  gem.authors       = ["Anantha Kumaran"]
+  gem.authors       = ["Adam Kumaran"]
   gem.email         = ["ananthakumaran@gmail.com"]
   gem.summary       = "local hosted, inmemory fake dynamodb"
 
