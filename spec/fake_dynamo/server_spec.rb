@@ -14,13 +14,10 @@ module FakeDynamo
       }
     end
     let(:app) { Server.new }
-    let(:server) { Server.new! }
 
-    it "should extract_operation" do
-      server.extract_operation('HTTP_X_AMZ_TARGET' => 'DynamoDB_20111205.CreateTable').should eq('CreateTable')
-      expect {
-        server.extract_operation('HTTP_X_AMZ_TARGET' => 'FakeDB_20111205.CreateTable')
-      }.to raise_error(UnknownOperationException)
+    it "errors on unknown operations" do
+      post '/', data.to_json, 'HTTP_X_AMZ_TARGET' => 'FakeDB_20111205.CreateTable'
+      last_response.status.should eql(400)
     end
 
     it "should send operation to db" do

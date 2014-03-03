@@ -39,6 +39,7 @@ module FakeDynamo
       @aof.close if @aof
       @aof = nil
       delete_db
+      init_db
     end
 
     def db
