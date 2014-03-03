@@ -4,7 +4,7 @@ A simple resetable DynamoDB implement for tests!
 
 ## About this Fork
 
-This is a fork of [Fake Dynamo](ihttps://github.com/ananthakumaran/fake_dynamo).
+This is a fork of [Fake Dynamo](ihttps://github.com/ananthakumaran/test_dynamo_db).
 I do not take credit for the original work. I have changed the code
 slightly and modified it's use case. This fork is for writing tests
 against DynamoDB. The original fork was cumbersome to setup and reset

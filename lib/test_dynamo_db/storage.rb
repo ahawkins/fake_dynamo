@@ -1,6 +1,6 @@
 require 'tempfile'
 
-module FakeDynamo
+module TestDynamoDB
   class Storage
 
     attr_accessor :compacted, :loaded

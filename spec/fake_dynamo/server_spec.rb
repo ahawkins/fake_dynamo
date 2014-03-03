@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-module FakeDynamo
+module TestDynamoDB
   describe Server do
     include Rack::Test::Methods
 

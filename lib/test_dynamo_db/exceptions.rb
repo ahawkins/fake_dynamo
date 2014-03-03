@@ -1,4 +1,4 @@
-module FakeDynamo
+module TestDynamoDB
   Error = Class.new StandardError
 
   class ErrorFactory

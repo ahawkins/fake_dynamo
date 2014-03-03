@@ -1,4 +1,4 @@
-module FakeDynamo
+module TestDynamoDB
   class Attribute
     attr_accessor :name, :value, :type
 

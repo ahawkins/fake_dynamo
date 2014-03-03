@@ -1,7 +1,7 @@
 require 'rack/request'
 require 'rack/lock'
 
-module FakeDynamo
+module TestDynamoDB
   class Server
     class << self
       def call(env)
@@ -44,7 +44,7 @@ module FakeDynamo
         response = db.process operation, data
         storage.persist operation, data
         [status, headers, response.to_json]
-      rescue FakeDynamo::Error => e
+      rescue TestDynamoDB::Error => e
         [e.status, headers, e.response.to_json]
       end
     end

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 require 'spec_helper'
 
-module FakeDynamo
+module TestDynamoDB
   describe Storage do
 
     let(:table) do

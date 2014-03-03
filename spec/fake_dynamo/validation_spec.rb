@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-module FakeDynamo
+module TestDynamoDB
   class ValidationTest
     include Validation
   end

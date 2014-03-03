@@ -1,6 +1,6 @@
 require 'yaml'
 
-module FakeDynamo
+module TestDynamoDB
   module Validation
 
     def validate!(&block)

@@ -1,4 +1,4 @@
-module FakeDynamo
+module TestDynamoDB
   class Table
     include Validation
     include Filter

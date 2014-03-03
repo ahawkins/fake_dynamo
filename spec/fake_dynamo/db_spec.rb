@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-module FakeDynamo
+module TestDynamoDB
   describe DB do
     let(:data) do
       {
@@ -198,7 +198,7 @@ module FakeDynamo
       it 'should validate payload' do
         expect {
           subject.process('BatchGetItem', {})
-        }.to raise_error(FakeDynamo::ValidationException)
+        }.to raise_error(TestDynamoDB::ValidationException)
       end
 
       it 'should return items' do
@@ -250,7 +250,7 @@ module FakeDynamo
                                 'Keys' => [{ 'HashKeyElement' => { 'S' => '1' }},
                                            { 'HashKeyElement' => { 'S' => 'asd' }}]}
                             }})
-        }.to raise_error(FakeDynamo::ResourceNotFoundException)
+        }.to raise_error(TestDynamoDB::ResourceNotFoundException)
       end
     end
 
@@ -264,7 +264,7 @@ module FakeDynamo
       it 'should validate payload' do
         expect {
           subject.process('BatchWriteItem', {})
-        }.to raise_error(FakeDynamo::ValidationException)
+        }.to raise_error(TestDynamoDB::ValidationException)
       end
 
       it 'should fail if table not found' do
@@ -274,7 +274,7 @@ module FakeDynamo
                               'xxx' => ['DeleteRequest' => { 'Key' => { 'HashKeyElement' => { 'S' => 'ananth' }}}]
                             }
                           })
-        }.to raise_error(FakeDynamo::ResourceNotFoundException, /table.*not.*found/i)
+        }.to raise_error(TestDynamoDB::ResourceNotFoundException, /table.*not.*found/i)
       end
 
       it 'should fail on conflict items' do
@@ -285,7 +285,7 @@ module FakeDynamo
                                        { 'DeleteRequest' => { 'Key' => { 'HashKeyElement' => { 'S' => 'ananth' }}}}]
                           }
                         })
-        }.to raise_error(FakeDynamo::ValidationException, /duplicate/i)
+        }.to raise_error(TestDynamoDB::ValidationException, /duplicate/i)
 
         expect {
           subject.process('BatchWriteItem', {
@@ -294,7 +294,7 @@ module FakeDynamo
                                          {'PutRequest' => {'Item' => { 'id' => { 'S' => 'ananth'}}}}]
                             }
                           })
-        }.to raise_error(FakeDynamo::ValidationException, /duplicate/i)
+        }.to raise_error(TestDynamoDB::ValidationException, /duplicate/i)
 
         expect {
           subject.process('BatchWriteItem', {
@@ -303,7 +303,7 @@ module FakeDynamo
                                          {'PutRequest' => {'Item' => { 'id' => { 'S' => 'ananth'}}}}]
                             }
                           })
-        }.to raise_error(FakeDynamo::ValidationException, /duplicate/i)
+        }.to raise_error(TestDynamoDB::ValidationException, /duplicate/i)
       end
 
       it 'writes/deletes item in the db' do
@@ -342,7 +342,7 @@ module FakeDynamo
                             }
                           })
 
-        }.to raise_error(FakeDynamo::ValidationException, /too many items/i)
+        }.to raise_error(TestDynamoDB::ValidationException, /too many items/i)
       end
 
       it 'should fail on request size greater than 1 mb' do
@@ -365,7 +365,7 @@ module FakeDynamo
                             }
                           })
 
-        }.to raise_error(FakeDynamo::ValidationException, /size.*exceed/i)
+        }.to raise_error(TestDynamoDB::ValidationException, /size.*exceed/i)
       end
     end
   end

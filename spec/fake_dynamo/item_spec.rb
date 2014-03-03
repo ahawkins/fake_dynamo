@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-module FakeDynamo
+module TestDynamoDB
   describe Item do
     subject do
       item = Item.new

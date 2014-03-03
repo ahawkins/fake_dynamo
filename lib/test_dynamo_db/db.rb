@@ -1,4 +1,4 @@
-module FakeDynamo
+module TestDynamoDB
   class DB
 
     include Validation

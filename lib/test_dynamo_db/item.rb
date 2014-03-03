@@ -1,4 +1,4 @@
-module FakeDynamo
+module TestDynamoDB
   class Item
     include Validation
     attr_accessor :key, :attributes

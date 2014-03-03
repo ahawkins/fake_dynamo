@@ -1,10 +1,10 @@
 require 'bundler/setup'
 
-require 'fake_dynamo'
+require 'test_dynamo_db'
 
 require 'rspec'
 require 'rack/test'
-require 'fake_dynamo'
+require 'test_dynamo_db'
 
 ENV['RACK_ENV'] = 'test'
 
@@ -14,7 +14,7 @@ module Utils
   end
 end
 
-module FakeDynamo
+module TestDynamoDB
   class Storage
     def initialize
       delete_db

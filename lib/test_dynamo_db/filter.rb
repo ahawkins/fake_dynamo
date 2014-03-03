@@ -1,4 +1,4 @@
-module FakeDynamo
+module TestDynamoDB
   module Filter
     include Validation
 
