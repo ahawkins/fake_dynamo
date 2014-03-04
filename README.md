@@ -18,8 +18,8 @@ case! **Many thanks to the original author!**
 
 | Amazon DynamoDB API version | TestDynamoDB gem version|
 | --------------------------- | ------------------------|
-| [2012-08-10][v2]            | 0.2.x                   |
-| [2011-12-05][v1]            | 0.1.x                   |
+| 2012-08-10]                 | 0.2.x (Unreleased)      |
+| 2011-12-05]                 | 0.1.x                   |
 
 
 ## Caveats
