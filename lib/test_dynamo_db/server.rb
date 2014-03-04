@@ -43,9 +43,9 @@ module TestDynamoDB
         operation = extract_operation request.env
         response = db.process operation, data
         storage.persist operation, data
-        [status, headers, response.to_json]
+        [status, headers, [response.to_json]]
       rescue TestDynamoDB::Error => e
-        [e.status, headers, e.response.to_json]
+        [e.status, headers, [e.response.to_json]]
       end
     end
 
