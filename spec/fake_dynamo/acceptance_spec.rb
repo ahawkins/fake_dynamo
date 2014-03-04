@@ -30,8 +30,10 @@ module TestDynamoDB
 
     it "can get/set keys" do
       table.load_schema
+      table.items.count.should eql(0)
       table.items.put name: 'foo'
 
+      table.items.count.should eql(1)
       table.items.at('foo').exists?.should be_true
 
       attributes = table.items.at('foo').attributes
@@ -39,6 +41,7 @@ module TestDynamoDB
 
       table.items.at('foo').delete
 
+      table.items.count.should eql(0)
       table.items.at('foo').exists?.should be_false
     end
   end

@@ -24,6 +24,7 @@ module TestDynamoDB
         'DeleteItem' => 'delete_item',
         'UpdateItem' => 'update_item',
         'Query' => 'query',
+        'Scan' => 'scan'
       }
     end
 
