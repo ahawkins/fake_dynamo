@@ -15,6 +15,7 @@ module TestDynamoDB
       @tables = {}
       @operation_map = {
         'CreateTable' => 'create_table',
+        'DescribeTable' => 'describe_table',
         'PutItem' => 'put_item',
         'GetItem' => 'get_item',
         'ListTables' => 'list_tables',
