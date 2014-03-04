@@ -14,6 +14,14 @@ dependencies. Upstream depends on active support and a few other
 things. The CLI is also removed. It's not intended for that use
 case! **Many thanks to the original author!**
 
+## Versions
+
+| Amazon DynamoDB API version | TestDynamoDB gem version|
+| --------------------------- | ------------------------|
+| [2012-08-10][v2]            | 0.2.x                   |
+| [2011-12-05][v1]            | 0.1.x                   |
+
+
 ## Caveats
 
 *  `ConsumedCapacityUnits` value will be 1 always.
