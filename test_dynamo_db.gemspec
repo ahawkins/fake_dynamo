@@ -17,4 +17,7 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = '>= 1.9.0'
   gem.add_dependency 'json'
+
+  gem.add_development_dependency 'webmock'
+  gem.add_development_dependency 'aws-sdk'
 end

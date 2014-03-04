@@ -5,6 +5,8 @@ require 'test_dynamo_db'
 require 'rspec'
 require 'rack/test'
 require 'test_dynamo_db'
+require 'webmock/rspec'
+require 'aws'
 
 ENV['RACK_ENV'] = 'test'
 
