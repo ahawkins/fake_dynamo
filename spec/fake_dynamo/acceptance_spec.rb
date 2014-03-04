@@ -39,6 +39,15 @@ module TestDynamoDB
       attributes = table.items.at('foo').attributes
       attributes['name'].should eq('foo')
 
+      foo = table.items.at('foo')
+
+      foo.attributes.update do
+        foo.attributes['bar'] = 'baz'
+      end
+
+      item = table.items.at('foo')
+      item.attributes['bar'].should eq('baz')
+
       table.items.at('foo').delete
 
       table.items.count.should eql(0)
