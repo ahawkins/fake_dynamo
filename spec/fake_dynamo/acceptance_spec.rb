@@ -53,5 +53,10 @@ module TestDynamoDB
       table.items.count.should eql(0)
       table.items.at('foo').exists?.should be_false
     end
+
+    it "can delete tables" do
+      table.delete
+      db.tables[table_name].exists?.should be_false
+    end
   end
 end
